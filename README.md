@@ -1,12 +1,13 @@
-# Welcome to My C++ Basics Repository! 🎉
-
+## Welcome to My C++ Pricing Repository! 🚀
 Hello there! 👋
 
-Thank you for visiting this repository, which serves as a collection of my foundational explorations in C++. As I embarked on the journey to learn C++, I decided to share my progress, code snippets, and insights here. Whether you're new to C++ or just curious to see how I've approached learning the language, I hope you find something useful!
+Thank you for visiting this repository, where I document my exploration of C++ through the implementation of pricing models based on partial differential equations (PDEs) and the Black-Scholes framework. As I delve into the world of quantitative finance and computational methods, this repository serves as a space to share my progress, code, and insights.
 
 ## 📚 About This Repository
 
-This repository contains basic C++ programs and examples that demonstrate fundamental concepts. From simple "Hello, World!" programs to slightly more complex exercises, it's all part of my learning experience. Feel free to explore, learn, and even suggest improvements!
+This repository focuses on applying fundamental C++ programming concepts to solve real-world problems in financial engineering. The primary goal is to implement pricing methods for financial derivatives using PDEs and the Black-Scholes model. Alongside these advanced applications, you’ll also find code that builds up the foundational skills necessary for these implementations.
+
+Whether you’re learning C++, studying quantitative finance, or just curious about numerical methods, I hope you find value in this work. Feel free to explore, learn, and share your suggestions for improvement!
 
 ## ⚙️ Compilation Tips for macOS
 
