@@ -25,7 +25,7 @@ double Option::price(double initial_stock_price) {
         for (int i = 1; i < N; ++i) {
             double delta = (V_prev[i + 1] - V_prev[i - 1]) / (2 * dS);
             double gamma = (V_prev[i + 1] - 2 * V_prev[i] + V_prev[i - 1]) / (dS * dS);
-            V[i] = V_prev[i] + dt * (0.5 * sigma * sigma * S[i] * S[i] * gamma + r * S[i] * delta - r * V_prev[i]);
+            V[i] = V_prev[i] + dt * (0.5 * sigma * sigma * S[i] * S[i] * gamma + r * S[i] * delta - r * V_prev[i]);  //Black-Scholes-Merton PDE
         }
 
         // Apply boundary conditions
