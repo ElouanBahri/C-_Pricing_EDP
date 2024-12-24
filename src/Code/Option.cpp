@@ -27,7 +27,7 @@ double Option::price(double initial_stock_price) {
     results[M] = V;  // Save payoff at maturity
 
     // Backward induction in time
-    for (int n = M; n > 0; --n) {
+    for (int n = M - 1 ; n >= 0; --n) {
         V_prev = V;
 
         // Update interior points

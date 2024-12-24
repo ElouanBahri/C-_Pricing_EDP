@@ -22,8 +22,8 @@ int main() {
     double default_rate = 0.05;
     double default_vol = 0.2;
     double default_max_stock = 200.0;
-    int default_price_steps = 100;
-    int default_time_steps = 100;
+    int default_price_steps = 10;
+    int default_time_steps = 10;
     double default_initial_stock_price = 100.0;
 
     // Get user input with default values

@@ -20,7 +20,7 @@ public:
     // Apply boundary conditions
     void applyBoundaryConditions(std::vector<double>& V, int n, double dt) const override {
         V[0] = 0.0;                              // At S = 0, the option value is 0
-        V[N] = S_max - K * std::exp(-r * (T - n * dt)); // At S = S_max
+        V[N] = std :: max(S_max - K * std::exp(-r * (T - n * dt)), 0.0); // At S = S_max
     }
 };
 
