@@ -1,6 +1,11 @@
 #include "Option.h"
 #include <cmath>
 #include <algorithm>
+#include <vector>
+#include <fstream>
+#include <iostream>
+
+using namespace std;
 
 double Option::price(double initial_stock_price) {
     double dS = S_max / N;  // Stock price step size
@@ -17,6 +22,10 @@ double Option::price(double initial_stock_price) {
     // Initialize payoff at maturity
     initializePayoff(V, S);
 
+    // Matrix to store the option values for 3D plotting
+    vector<vector<double> > results(M + 1, vector<double>(N + 1));
+    results[M] = V;  // Save payoff at maturity
+
     // Backward induction in time
     for (int n = M; n > 0; --n) {
         V_prev = V;
@@ -30,7 +39,19 @@ double Option::price(double initial_stock_price) {
 
         // Apply boundary conditions
         applyBoundaryConditions(V, n, dt);
+
+        results[n] = V;
     }
+    // Save the results to a file for 3D plotting
+    ofstream outFile("option_values.txt");
+    for (int n = 0; n <= M; ++n) {
+        for (int i = 0; i <= N; ++i) {
+            outFile << n * dt << " " << S[i] << " " << results[n][i] << endl;
+        }
+        outFile << endl;  // Separate time steps
+    }
+    outFile.close();
+    cout << "Results saved to 'option_values.txt'." << endl;
 
     // Return the option price for the given initial stock price
     int index = static_cast<int>(initial_stock_price / dS);
