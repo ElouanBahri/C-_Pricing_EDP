@@ -2,6 +2,9 @@
 
 #include "Code/EuropeanOption.h"
 #include "Code/DigitalOption.h"
+#include "Code/BarrierOption.h"
+
+
 
 #include <iostream>
 #include <limits>  // For numeric_limits
@@ -25,10 +28,11 @@ int main() {
     double default_rate = 0.05;
     double default_vol = 0.2;
     double default_max_stock = 200.0;
-    int default_price_steps = 10;
-    int default_time_steps = 10;
+    int default_price_steps = 100;
+    int default_time_steps = 100;
     double default_initial_stock_price = 100.0;
     double default_digitalpayout = 1.0;
+    double default_barrier_level = 120.0;         // Barrier level
 
     // Get user input with default values
     double strike = getInput("Enter strike price", default_strike);
@@ -40,36 +44,52 @@ int main() {
     int time_steps = static_cast<int>(getInput("Enter number of time steps", default_time_steps));
     double initial_stock_price = getInput("Enter initial stock price", default_initial_stock_price);
     double digitalpayout = getInput("Enter payout for the Digital Option", default_digitalpayout);
+    double barrier_level = getInput("Enter the barrier level for the Barrier Option", default_barrier_level);
+    
+    
+    
+
+    // Create an Up-and-In Barrier call option
+    BarrierOption upAndInCallOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps, true, true, barrier_level);
+    // Create a Down-and-Out Barrier put option
+    BarrierOption downAndOutPutOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps, false, false, barrier_level);
+
+    // Price the Down-and-Out Barrier put option
+    double downAndOutPutPriceCrankNicolson = downAndOutPutOption.priceCrankNicolson(initial_stock_price);
+    std::cout << "Down-and-Out Barrier Put Option Price: " << downAndOutPutPriceCrankNicolson << std::endl;
+    // Price the Up-and-In Barrier Call Option Price
+    double upAndInCallPriceCrankNicolson = upAndInCallOption.priceCrankNicolson(initial_stock_price);
+    std::cout << "Up-and-In Barrier Call Option Price (Crank-Nicolson): " << upAndInCallPriceCrankNicolson << std::endl;
 
 
+    
     
     // Create a European call option
     EuropeanOption callOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps, true);
     // Create a European put option
     EuropeanOption putOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps, false);
 
-    
+    // Price the European put option
+    double putPriceCrankNicolson = putOption.priceCrankNicolson(initial_stock_price);
+    std::cout << "European Put Option Price : " << putPriceCrankNicolson << std::endl;
+    // Price the European call option
+    double callPriceCrankNicolson = callOption.priceCrankNicolson(initial_stock_price);
+    std::cout << "European Call Option Price : " << callPriceCrankNicolson << std::endl;
+
+
     // Create a Digital call option
     DigitalOption digitalCallOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps, true, digitalpayout);
     // Create a Digital put option
     DigitalOption digitalPutOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps, false, digitalpayout);
 
-
-    // Price the European call option
-    double callPrice = callOption.price(initial_stock_price);
-    std::cout << "European Call Option Price 2: " << callPrice << std::endl;
-    // Price the European put option
-    double putPrice2 = putOption.price(initial_stock_price);
-    std::cout << "European Put Option Price 2: " << putPrice2 << std::endl;
-
-
-    
-    // Price the Digital put option
-    double digitalPutPrice = digitalPutOption.price(initial_stock_price);
-    std::cout << "Digital Put Option Price: " << digitalPutPrice << std::endl;
     // Price the Digital call option
-    double digitalCallPrice = digitalCallOption.price(initial_stock_price);
-    std::cout << "Digital Call Option Price: " << digitalCallPrice << std::endl;
+    double digitalCallPriceCrankNicolson = digitalCallOption.priceCrankNicolson(initial_stock_price);
+    std::cout << "Digital Call Option Price: " << digitalCallPriceCrankNicolson << std::endl;
+    // Price the Digital put option
+    double digitalPutPriceCrankNicolson = digitalPutOption.priceCrankNicolson(initial_stock_price);
+    std::cout << "Digital Put Option Price : " << digitalPutPriceCrankNicolson << std::endl;
+
+
 
     return 0;
 }

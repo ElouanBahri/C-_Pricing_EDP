@@ -24,10 +24,14 @@ public:
     virtual void initializePayoff(std::vector<double>& V, const std::vector<double>& S) const = 0;
     virtual void applyBoundaryConditions(std::vector<double>& V, int n, double dt) const = 0;
 
-    // Pricing method (finite difference method)
-    double price(double initial_stock_price);
+    // Pricing methods
+    double price(double initial_stock_price);            // Explicit finite difference method
+    double priceCrankNicolson(double initial_stock_price); // Crank-Nicolson method
+
+private:
+    // Helper function for solving tridiagonal matrix (used in Crank-Nicolson)
+    void thomasAlgorithm(std::vector<double>& a, std::vector<double>& b, std::vector<double>& c,
+                         std::vector<double>& d, std::vector<double>& V, int N);
 };
 
 #endif
-
-
