@@ -1,6 +1,5 @@
 #include <iostream>
-#include "Code/EuropeanCallOption.h"
-#include "Code/EuropeanPutOption.h"
+
 #include "Code/EuropeanOption.h"
 #include "Code/DigitalOption.h"
 
@@ -29,6 +28,7 @@ int main() {
     int default_price_steps = 10;
     int default_time_steps = 10;
     double default_initial_stock_price = 100.0;
+    double default_digitalpayout = 1.0;
 
     // Get user input with default values
     double strike = getInput("Enter strike price", default_strike);
@@ -39,20 +39,37 @@ int main() {
     int price_steps = static_cast<int>(getInput("Enter number of price steps", default_price_steps));
     int time_steps = static_cast<int>(getInput("Enter number of time steps", default_time_steps));
     double initial_stock_price = getInput("Enter initial stock price", default_initial_stock_price);
+    double digitalpayout = getInput("Enter payout for the Digital Option", default_digitalpayout);
 
+
+    
     // Create a European call option
     EuropeanOption callOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps, true);
-
     // Create a European put option
     EuropeanOption putOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps, false);
 
-    // Price the call option
+    
+    // Create a Digital call option
+    DigitalOption digitalCallOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps, true, digitalpayout);
+    // Create a Digital put option
+    DigitalOption digitalPutOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps, false, digitalpayout);
+
+
+    // Price the European call option
     double callPrice = callOption.price(initial_stock_price);
     std::cout << "European Call Option Price 2: " << callPrice << std::endl;
-
-    // Price the put option
+    // Price the European put option
     double putPrice2 = putOption.price(initial_stock_price);
     std::cout << "European Put Option Price 2: " << putPrice2 << std::endl;
+
+
+    
+    // Price the Digital put option
+    double digitalPutPrice = digitalPutOption.price(initial_stock_price);
+    std::cout << "Digital Put Option Price: " << digitalPutPrice << std::endl;
+    // Price the Digital call option
+    double digitalCallPrice = digitalCallOption.price(initial_stock_price);
+    std::cout << "Digital Call Option Price: " << digitalCallPrice << std::endl;
 
     return 0;
 }
