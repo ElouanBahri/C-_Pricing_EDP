@@ -1,6 +1,9 @@
 #include <iostream>
 #include "Code/EuropeanCallOption.h"
 #include "Code/EuropeanPutOption.h"
+#include "Code/EuropeanOption.h"
+#include "Code/DigitalOption.h"
+
 #include <iostream>
 #include <limits>  // For numeric_limits
 
@@ -38,20 +41,18 @@ int main() {
     double initial_stock_price = getInput("Enter initial stock price", default_initial_stock_price);
 
     // Create a European call option
-    EuropeanCallOption callOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps);
+    EuropeanOption callOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps, true);
 
     // Create a European put option
-    EuropeanPutOption putOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps);
-
+    EuropeanOption putOption(strike, maturity, rate, vol, max_stock, price_steps, time_steps, false);
 
     // Price the call option
     double callPrice = callOption.price(initial_stock_price);
-    std::cout << "European Call Option Price: " << callPrice << std::endl;
+    std::cout << "European Call Option Price 2: " << callPrice << std::endl;
 
     // Price the put option
-    double putPrice = putOption.price(initial_stock_price);
-    std::cout << "European Put Option Price: " << putPrice << std::endl;
-
+    double putPrice2 = putOption.price(initial_stock_price);
+    std::cout << "European Put Option Price 2: " << putPrice2 << std::endl;
 
     return 0;
 }
