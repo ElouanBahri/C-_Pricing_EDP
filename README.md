@@ -1,4 +1,4 @@
-## Welcome to My C++ Pricing Repository! 🚀
+## Welcome to My C++ Pricing Project! 🚀
 Hello there! 👋
 
 Thank you for visiting this repository, where I document my exploration of C++ through the implementation of pricing models based on partial differential equations (PDEs) and the Black-Scholes framework. As I delve into the world of quantitative finance and computational methods, this repository serves as a space to share my progress, code, and insights.
@@ -8,6 +8,15 @@ Thank you for visiting this repository, where I document my exploration of C++ t
 This repository focuses on applying fundamental C++ programming concepts to solve real-world problems in financial engineering. The primary goal is to implement pricing methods for financial derivatives using PDEs and the Black-Scholes model. Alongside these advanced applications, you’ll also find code that builds up the foundational skills necessary for these implementations.
 
 Whether you’re learning C++, studying quantitative finance, or just curious about numerical methods, I hope you find value in this work. Feel free to explore, learn, and share your suggestions for improvement!
+
+To compile and generate an executable capable of pricing European call/put options and digital call/put options, you can use the following command:
+
+```bash
+clang++ -o main  src/main.cpp src/Code/Option.cpp
+```
+
+Running this executable will prompt the user to input option parameters and output the calculated prices directly in the terminal. Additionally, the program generates output files containing option price grids, which can be visualized later using Python.
+
 
 ## ⚙️ Compilation Tips for macOS
 
