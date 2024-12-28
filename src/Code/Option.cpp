@@ -113,8 +113,8 @@ void Option::thomasAlgorithm(vector<double>& a, vector<double>& b, vector<double
         d[i] -= w * d[i - 1];
     }
 
-    V[N - 1] = d[N - 1] / b[N - 1];
-    for (int i = N - 2; i >= 1; --i) {
+    
+    for (int i = N - 1; i >= 1; --i) {
         V[i] = (d[i] - c[i] * V[i + 1]) / b[i];
     }
 }
